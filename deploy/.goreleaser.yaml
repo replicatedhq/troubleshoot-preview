@@ -14,7 +14,7 @@ builds:
       - "386"
     env:
       - CGO_ENABLED=0
-    main: github.com/replicatedhq/troubleshoot-preview/cmd/troubleshoot-preview
+    main: cmd/troubleshoot-preview/main.go
     ldflags: -s -w
       -X github.com/replicatedhq/troubleshoot-preview/pkg/version.version={{.Version}}
       -X github.com/replicatedhq/troubleshoot-preview/pkg/version.gitSHA={{.Commit}}
