@@ -1,0 +1,36 @@
+project_name: troubleshoot-preview
+release:
+  github:
+    owner: replicatedhq
+    name: troubleshoot-preview
+builds:
+  - id: troubleshoot-preview
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - "386"
+    env:
+      - CGO_ENABLED=0
+    ldflags: -s -w
+      -X github.com/replicatedhq/troubleshoot-preview/pkg/version.version={{.Version}}
+      -X github.com/replicatedhq/troubleshoot-preview/pkg/version.gitSHA={{.Commit}}
+      -X github.com/replicatedhq/troubleshoot-preview/pkg/version.buildTime={{.Date}}
+      -extldflags "-static"
+    binary: troubleshoot-preview
+    hooks: {}
+archives:
+  - id: troubleshoot-preview
+    builds:
+      - troubleshoot-preview
+    format: tar.gz
+    name_template: "{{ .Binary }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - licence*
+      - LICENCE*
+      - license*
+      - LICENSE*
+      - readme*
+      - README*
