@@ -14,7 +14,7 @@ builds:
       - "386"
     env:
       - CGO_ENABLED=0
-    main: cmd/troubleshoot-preview/cmd
+    main: cmd/troubleshoot-preview
     ldflags: -s -w
       -X github.com/replicatedhq/troubleshoot-preview/pkg/version.version={{.Version}}
       -X github.com/replicatedhq/troubleshoot-preview/pkg/version.gitSHA={{.Commit}}
