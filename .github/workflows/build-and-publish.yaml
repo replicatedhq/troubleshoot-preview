@@ -60,7 +60,7 @@ jobs:
       - uses: docker/build-push-action@v1
         with:
           repository: replicated/troubleshoot-preview
-          username: replicatedbot
+          username: repldeploy2
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           tag_with_ref: true
 
