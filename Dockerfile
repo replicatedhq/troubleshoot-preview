@@ -16,4 +16,6 @@ COPY --from=builder /go/src/github.com/replicatedhq/troubleshoot-preview/bin /ap
 
 EXPOSE 3000
 
-CMD ["/app/troubleshoot-preview"]
+ENTRYPOINT ["/app/troubleshoot-preview"]
+
+CMD ["api"]
