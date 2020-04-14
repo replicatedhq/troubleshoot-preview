@@ -35,7 +35,7 @@ clean:
 
 .PHONY: run
 run:
-	./bin/troubleshoot-preview
+	./bin/troubleshoot-preview api
 
 .PHONY: build
 build:
