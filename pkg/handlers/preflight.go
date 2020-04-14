@@ -9,6 +9,7 @@ import (
 	"github.com/replicatedhq/troubleshoot-preview/pkg/logger"
 	"github.com/replicatedhq/troubleshoot-preview/pkg/persistence"
 	"github.com/teris-io/shortid"
+	"go.uber.org/zap"
 )
 
 type CreatePreflightResponse struct {
@@ -27,6 +28,8 @@ func CreatePreflight(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
 		return
 	}
+
+	logger.Debug("creating preflight")
 
 	preflightRequest := PreflightRequest{}
 	if err := json.NewDecoder(r.Body).Decode(&preflightRequest); err != nil {
@@ -61,6 +64,9 @@ func UpdatePreflight(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	logger.Debug("updating preflight",
+		zap.String("id", mux.Vars(r)["id"]))
+
 	preflightRequest := PreflightRequest{}
 	if err := json.NewDecoder(r.Body).Decode(&preflightRequest); err != nil {
 		logger.Error(err)
@@ -77,17 +83,4 @@ func UpdatePreflight(w http.ResponseWriter, r *http.Request) {
 	}
 
 	JSON(w, 204, nil)
-}
-
-func ServePreflight(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-
-	cmd := persistence.MustGetRedisClient().Get(vars["id"])
-	if cmd.Err() != nil {
-		logger.Error(cmd.Err())
-		w.WriteHeader(500)
-		return
-	}
-
-	YAML(w, 200, cmd.String())
 }

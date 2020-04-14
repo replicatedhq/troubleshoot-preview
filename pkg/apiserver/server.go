@@ -15,13 +15,13 @@ func Start() {
 
 	r.HandleFunc("/healthz", handlers.Healthz)
 
-	r.HandleFunc("/v1/preflight/{id}", handlers.ServePreflight).Methods("GET")
 	r.HandleFunc("/v1/preflight/{id}", handlers.UpdatePreflight).Methods("PUT", "OPTIONS")
 	r.HandleFunc("/v1/preflight", handlers.CreatePreflight).Methods("POST", "OPTIONS")
 
-	r.HandleFunc("/v1/support-bundle/{id}", handlers.ServeSupportBundle).Methods("GET")
 	r.HandleFunc("/v1/support-bundle/{id}", handlers.UpdateSupportBundle).Methods("PUT", "OPTIONS")
 	r.HandleFunc("/v1/support-bundle", handlers.CreateSupportBundle).Methods("POST", "OPTIONS")
+
+	r.HandleFunc("/{id}", handlers.Serve).Methods("GET")
 
 	srv := &http.Server{
 		Handler: r,
