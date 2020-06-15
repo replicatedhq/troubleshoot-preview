@@ -17,7 +17,7 @@ type CreateSupportBundleResponse struct {
 }
 
 type SupportBundleRequest struct {
-	Spec string `json:"spec"`
+	Spec []byte `json:"spec"`
 }
 
 func CreateSupportBundle(w http.ResponseWriter, r *http.Request) {
