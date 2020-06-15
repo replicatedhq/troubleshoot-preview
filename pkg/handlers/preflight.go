@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -17,7 +18,7 @@ type CreatePreflightResponse struct {
 }
 
 type PreflightRequest struct {
-	Spec string `json:"spec"`
+	Spec []byte `json:"spec"`
 }
 
 func CreatePreflight(w http.ResponseWriter, r *http.Request) {
@@ -38,6 +39,7 @@ func CreatePreflight(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Printf("%s\n", preflightRequest.Spec)
 	generator := shortid.MustNew(1, shortid.DefaultABC, uint64(time.Now().UnixNano()))
 	id := generator.MustGenerate()
 

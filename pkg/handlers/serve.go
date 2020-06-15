@@ -18,5 +18,14 @@ func Serve(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	YAML(w, 200, cmd.Val())
+	val, err := cmd.Result()
+	if err != nil {
+		logger.Error(err)
+		w.WriteHeader(500)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/x-yaml")
+	w.WriteHeader(200)
+	w.Write([]byte(val))
 }
