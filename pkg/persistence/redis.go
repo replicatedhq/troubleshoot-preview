@@ -16,7 +16,7 @@ func MustGetRedisClient() *redis.Client {
 
 	options, err := redis.ParseURL(os.Getenv("FLY_REDIS_CACHE_URL"))
 	if err != nil {
-		fmt.Printf("error parsing redis url (%s): %v\n", os.Getenv("REDFLY_REDIS_CACHE_URLIS_URL"), err)
+		fmt.Printf("error parsing redis url (%s): %v\n", os.Getenv("FLY_REDIS_CACHE_URL"), err)
 		panic(err)
 	}
 
