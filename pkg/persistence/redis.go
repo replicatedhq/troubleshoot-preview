@@ -3,6 +3,7 @@ package persistence
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/go-redis/redis/v7"
 )
@@ -19,6 +20,8 @@ func MustGetRedisClient() *redis.Client {
 		fmt.Printf("error parsing redis url (%s): %v\n", os.Getenv("FLY_REDIS_CACHE_URL"), err)
 		panic(err)
 	}
+
+	options.IdleTimeout = 3 * time.Minute
 
 	client := redis.NewClient(options)
 	Redis = client
